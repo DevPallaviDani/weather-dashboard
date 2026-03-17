@@ -22,20 +22,28 @@ function ForecastCard({ foreCastData }) {
   return (
     <>
       <div className="col-span-8 bg-white rounded-2xl p-3 shadow">
-        <h2 className="text-lg font-semibold mb-3">Todays Forecast</h2>
-        <div className="grid grid-cols-7 gap-6 items-center justify-between">
+        <h2 className="text-lg font-semibold mb-2">Todays Forecast</h2>
+        <div className="grid grid-cols-8 gap-6 items-center justify-between">
           {foreCastData && foreCastData.length > 0 ? (
             foreCastData.map((item, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center p-3 border-r-2 hover:bg-gray-50 transition"
+                className="flex flex-col items-center p-2 border-r-2 hover:bg-gray-50 transition"
               >
                 {console.log(item)}
                 <p className="text-sm text-gray-500">
                   {getForeCastHours(item)}
                 </p>
-
-                {/* <div className="text-sm my-2"> {item.weather[0].main}</div> */}
+                {/* {console.log(
+                  `https://openweathermap.org/payload/api/media/file/${item.weather[0].icon}.png`,
+                )} */}
+               
+                  <img
+                    className="size-8"
+                    src={`https://openweathermap.org/payload/api/media/file/${item.weather[0].icon}.png`}
+                    alt="weather"
+                  />
+               
 
                 {/* <p className="font-semibold"> {Math.round(item.main.temp)}°C</p> */}
                 <p className="p-1 font-semibold">{item.main.temp}°C</p>

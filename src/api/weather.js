@@ -15,7 +15,7 @@ export const getWeather = async (city) => {
 };
 export const getForeCast = async () => {
   try {
-    const api_forecast_url = `https://api.openweathermap.org/data/2.5/forecast?lat=18.5246&lon=73.8786&appid=1c3de1e7fcd103fffec5735b2557cb78&units=metric&cnt=7`;
+    const api_forecast_url = `https://api.openweathermap.org/data/2.5/forecast?lat=18.5246&lon=73.8786&appid=1c3de1e7fcd103fffec5735b2557cb78&units=metric&cnt=8`;
     const resp = await fetch(api_forecast_url);
     const forecastData = await resp.json();
     console.log(`this is forecastdata ${forecastData}`);
