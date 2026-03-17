@@ -1,4 +1,5 @@
 import { PlayCircle } from "lucide-react";
+import { Droplets, Wind, Gauge } from "lucide-react";
 import React from "react";
 
 function StatsCard({ title, value, icon }) {

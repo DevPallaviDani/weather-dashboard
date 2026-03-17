@@ -1,21 +1,21 @@
 import { Droplets, Wind, Gauge } from "lucide-react";
 import React from "react";
 
-function WeatherCard() {
+function WeatherCard({ weather }) {
+  if (!weather) return null;
   return (
     <>
       <div
         className="col-span-8 row-span-1 p-2 text-gray-700"
         // bg-gradient-to-r from-gray-500 to-white-500
       >
-          
-          {/* <span>Pune</span> */}
+        {/* <span>Pune</span> */}
         {/* Top section */}
         <div className="flex justify-between items-start">
           <div>
-            <p className="text-lg opacity-90">Today</p>
-            <h1 className="text-8xl font-bold mt-2">28°C</h1>
-            <p className="mt-2 text-lg">Mostly Sunny ☀️</p>
+            <p className="text-lg opacity-90">Pune</p>
+            <h1 className="text-8xl font-bold mt-2"> {weather.main.temp}°C</h1>
+            <p className="mt-2 text-lg">{weather.weather[0].description} ☀️</p>
           </div>
 
           {/* Weather Icon */}

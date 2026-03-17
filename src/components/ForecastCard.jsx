@@ -10,24 +10,41 @@ const data = [
   { time: "02:00 PM", icon: "🌧", temp: 30 },
   { time: "03:00 PM", icon: "⛅", temp: 28 },
 ];
-function ForecastCard() {
+const getForeCastHours = (item) => {
+  const foreCastHours = new Date(item.dt_txt);
+  return foreCastHours.toLocaleTimeString("en-IN", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
+
+function ForecastCard({ foreCastData }) {
   return (
     <>
-      <div className="col-span-8 bg-white rounded-2xl p-2 shadow h-fit">
-        <h2 className="text-lg font-semibold mb-2">Todays Forecast</h2>
-        <div className="grid grid-cols-7 gap-4">
-          {data.map((item, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center p-1  rounded-xl hover:bg-gray-50 transition"
-            >
-              <p className="text-sm text-gray-500">{item.time}</p>
+      <div className="col-span-8 bg-white rounded-2xl p-3 shadow">
+        <h2 className="text-lg font-semibold mb-3">Todays Forecast</h2>
+        <div className="grid grid-cols-7 gap-6 items-center justify-between">
+          {foreCastData && foreCastData.length > 0 ? (
+            foreCastData.map((item, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center p-3 border-r-2 hover:bg-gray-50 transition"
+              >
+                {console.log(item)}
+                <p className="text-sm text-gray-500">
+                  {getForeCastHours(item)}
+                </p>
 
-              <div className="text-3xl my-2">{item.icon}</div>
+                {/* <div className="text-sm my-2"> {item.weather[0].main}</div> */}
 
-              <p className="font-semibold">{item.temp}</p>
-            </div>
-          ))}
+                {/* <p className="font-semibold"> {Math.round(item.main.temp)}°C</p> */}
+                <p className="p-1 font-semibold">{item.main.temp}°C</p>
+                <div></div>
+              </div>
+            ))
+          ) : (
+            <p>Loading...</p>
+          )}
         </div>
       </div>
     </>

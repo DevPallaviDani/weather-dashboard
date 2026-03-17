@@ -19,7 +19,7 @@ A modern and responsive Weather Dashboard built using React and Tailwind CSS. Th
 
 ## 🔗 Live Demo
 
-https://weather-ui-by-pallavi.vercel.app
+https://weather-dashboard-by-pallavi.vercel.app
 
 ## 📸 Screenshots
 
