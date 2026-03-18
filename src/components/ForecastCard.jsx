@@ -31,7 +31,7 @@ function ForecastCard({ foreCastData }) {
                 className="flex flex-col items-center p-4
                  border-r-2 border-gray-200 last:border-none  hover:bg-gray-50 transition"
               >
-                {console.log("POP: ",item.pop)}
+               
                 <p className="text-sm text-gray-500">
                   {getForeCastHours(item)}
                 </p>

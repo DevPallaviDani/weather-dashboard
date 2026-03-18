@@ -18,7 +18,7 @@ export const getForeCast = async () => {
     const api_forecast_url = `https://api.openweathermap.org/data/2.5/forecast?lat=18.5246&lon=73.8786&appid=1c3de1e7fcd103fffec5735b2557cb78&units=metric&cnt=8`;
     const resp = await fetch(api_forecast_url);
     const forecastData = await resp.json();
-    console.log(`this is forecastdata ${forecastData}`);
+    // console.log(`this is forecastdata ${forecastData}`);
     return forecastData;
   } catch (error) {
     console.error(error);

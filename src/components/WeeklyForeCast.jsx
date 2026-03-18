@@ -6,8 +6,8 @@ const forecast = [
   { day: "Wed", icon: "☁️", max: 27, min: 21 },
   { day: "Thu", icon: "☀️", max: 29, min: 22 },
   { day: "Fri", icon: "🌤", max: 30, min: 23 },
-  { day: "Sat", icon: "⛅", max: 29, min: 22 },
-  { day: "Sun", icon: "🌦", max: 27, min: 21 },
+  // { day: "Sat", icon: "⛅", max: 29, min: 22 },
+  // { day: "Sun", icon: "🌦", max: 27, min: 21 },
 ];
 
 function WeeklyForeCast() {
@@ -17,9 +17,10 @@ function WeeklyForeCast() {
       className="col-span-4 row-span-3 bg-white rounded-2xl p-6 shadow"
      
       >
-        <h2 className="text-lg font-semibold mb-4">7-Day Forecast</h2>
+        <h2 className="text-lg font-semibold mb-4">Next Days</h2>
 
-        <div className="space-y-4">
+        <div className="space-y-14"
+        >
           {forecast.map((item, index) => (
             <div
               key={index}

@@ -6,12 +6,12 @@ import StatsCard from "../components/StatsCard";
 import ForecastCard from "../components/ForecastCard";
 import WeeklyForeCast from "../components/WeeklyForeCast";
 import { getWeather, getForeCast } from "../api/weather";
-import { Droplets, Wind, Gauge,ArrowDownUp } from "lucide-react";
+import { Droplets, Wind, Gauge, ArrowDownUp, CloudRain, Thermometer } from "lucide-react";
 
 const Dashboard = () => {
   const [weather, setWeather] = useState(null);
   const [foreCast, setForeCast] = useState([]);
-
+let rainChance =null ;
   useEffect(() => {
     try {
       getWeather("pune").then((data) => {
@@ -25,8 +25,9 @@ const Dashboard = () => {
       throw error;
     }
   }, []);
-  useEffect(() => {
-    console.log("Forecast data: ", foreCast);
+  useEffect(() => {   
+    //  rainChance = Math.round((foreCast[0]?.pop ?? 0) * 100);
+      // console.log("Forecast data: ", foreCast);
   }, [foreCast]);
 
   return (
@@ -67,25 +68,30 @@ const Dashboard = () => {
                   title="Real Feel"
                   value={`${Math.round(weather.main.feels_like)} °C`}
                   // icon="🌡"
-                   icon={Droplets}
+                  icon={Thermometer}
+                  iconColor={"red"}
                 />
                 <StatsCard
                   title="Wind"
                   value={`${weather.wind.speed} km/h`}
-                 // icon="🌬"
-                 icon={Wind}
+                  // icon="🌬"
+                  icon={Wind}
+                  iconColor={"gray"}
                 />
                 <StatsCard
                   title="Chance of rain"
                   value={`${Math.round(foreCast[0].pop * 100)}%`}
-                 // icon="💧"
-                 icon={Droplets}
+                  // icon="💧"
+                  icon={CloudRain}
+                  iconColor={"blue"}
                 />
+                {/* {console.log("POP from Dashboard",foreCast[0].pop)} */}
                 <StatsCard
                   title="Pressure"
                   value={weather.main.pressure}
-                 // icon="☀️"
-                 icon={ArrowDownUp}
+                  // icon="☀️"
+                  icon={ArrowDownUp}
+                  iconColor={"black"}
                 />
 
                 {/* <StatsCard title="Humidity" value="72%" icon="💧" />

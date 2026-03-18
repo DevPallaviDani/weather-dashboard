@@ -1,7 +1,7 @@
 import { Droplets, Wind, Gauge } from "lucide-react";
 import React from "react";
 const cityName = "Pune";
-function WeatherCard({ weather,forecast }) {
+function WeatherCard({ weather, forecast }) {
   if (!weather) return null;
   return (
     <>
@@ -12,10 +12,10 @@ function WeatherCard({ weather,forecast }) {
             <h1 className="font-bold text-5xl">{cityName}</h1>
             <p className="text-sm text-gray-400">
               Chance of rain:
-            <span> {Math.round(forecast[0].pop * 100)}%</span> 
-           
+              <span> {Math.round(forecast[0].pop * 100)}%</span>
             </p>
           </div>
+          {/* {console.log("POP from WeatherCard",forecast[0].pop)} */}
 
           <div className="grid content-end">
             <h2 className="text-7xl font-bold mt-1">
@@ -26,8 +26,6 @@ function WeatherCard({ weather,forecast }) {
                 {weather.weather[0].description} ☀️
               </p> */}
           </div>
-
-          {console.log("POP from weather: ",weather.pop)}
         </div>
         <div>
           {/* Weather Icon */}
