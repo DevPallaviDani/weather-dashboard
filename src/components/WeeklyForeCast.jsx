@@ -13,14 +13,18 @@ const forecast = [
 function WeeklyForeCast() {
   return (
     <>
-      <div className="col-span-4 row-span-4 bg-white rounded-2xl p-6 shadow">
+      <div 
+      className="col-span-4 row-span-3 bg-white rounded-2xl p-6 shadow"
+     
+      >
         <h2 className="text-lg font-semibold mb-4">7-Day Forecast</h2>
 
         <div className="space-y-4">
           {forecast.map((item, index) => (
             <div
               key={index}
-              className="flex items-center justify-between p-6 hover:bg-gray-50 transition border-b-2"
+              className="flex items-center justify-between p-6 hover:bg-gray-50
+               transition border-b-2 border-gray-200 last:border-none"
             >
               {/* day  */}
               <span className="text-gray-500 w-10">{item.day}</span>

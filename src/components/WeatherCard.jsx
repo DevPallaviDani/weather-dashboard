@@ -1,44 +1,44 @@
 import { Droplets, Wind, Gauge } from "lucide-react";
 import React from "react";
 const cityName = "Pune";
-function WeatherCard({ weather }) {
+function WeatherCard({ weather,forecast }) {
   if (!weather) return null;
   return (
     <>
-      <div
-        className="col-span-8 p-2 text-gray-700 bg-white rounded-2xl min-h-fit"
-        // bg-gradient-to-r from-gray-500 to-white-500
-      >
+      <div className="flex justify-between col-span-8 p-2 text-gray-700 bg-white rounded-2xl min-h-fit">
         {/* Top section */}
-        <div className="flex justify-between items-start">
-          <div className="grid grid-rows-3 mt-2 ml-2">
+        <div className="grid gap-4 p-2">
+          <div>
             <h1 className="font-bold text-5xl">{cityName}</h1>
             <p className="text-sm text-gray-400">
-              Chance of rain: {weather.weather[0].description ?? "0"}%
+              Chance of rain:
+            <span> {Math.round(forecast[0].pop * 100)}%</span> 
+           
             </p>
-            <div>
-              <h2 className="text-5xl font-bold mt-1">
-                {" "}
-                {Math.round(weather.main.temp)}°C
-              </h2>
-              {/* <p className="mt-2 text-lg">
+          </div>
+
+          <div className="grid content-end">
+            <h2 className="text-7xl font-bold mt-1">
+              {" "}
+              {Math.round(weather.main.temp)}°C
+            </h2>
+            {/* <p className="mt-2 text-lg">
                 {weather.weather[0].description} ☀️
               </p> */}
-            </div>
           </div>
 
-          {console.log(weather)}
-          <div>
-            {/* Weather Icon */}
-            {/* <div className="text-6xl">${weather.weather[0].icon}☀️</div> */}
-            <img
-              className="size-40 shadow-2xl hover:shadow-black hover:scale-105 rounded-full  bg-gradient-to-r from-slate-950 to-sky-950"
-              src={`https://openweathermap.org/payload/api/media/file/${weather.weather[0].icon}.png`}
-              alt="weather"
-            />
-          </div>
+          {console.log("POP from weather: ",weather.pop)}
         </div>
-
+        <div>
+          {/* Weather Icon */}
+          {/* <div className="text-6xl">${weather.weather[0].icon}☀️</div> */}
+          <img
+            className="size-60  hover:shadow-black hover:scale-105 rounded-full  "
+            // bg-gradient-to-r from-slate-950 to-sky-950
+            src={`https://openweathermap.org/payload/api/media/file/${weather.weather[0].icon}.png`}
+            alt="weather"
+          />
+        </div>
         {/* Bottom stats */}
         {/* <div className="grid grid-cols-3 gap-6 mt-10">
           <div className="flex items-center gap-2">

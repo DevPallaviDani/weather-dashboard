@@ -6,6 +6,7 @@ import StatsCard from "../components/StatsCard";
 import ForecastCard from "../components/ForecastCard";
 import WeeklyForeCast from "../components/WeeklyForeCast";
 import { getWeather, getForeCast } from "../api/weather";
+import { Droplets, Wind, Gauge,ArrowDownUp } from "lucide-react";
 
 const Dashboard = () => {
   const [weather, setWeather] = useState(null);
@@ -32,22 +33,25 @@ const Dashboard = () => {
     <div className="flex min-h-screen bg-gray-100">
       <Sidebar />
 
-      <div className="flex-3 p-6">
+      <div className="flex-3 p-3">
         <Header />
 
-        <div className="grid grid-cols-12 gap-6 mt-4 auto-rows-min">
+        <div className="grid grid-cols-12 gap-4 items-end">
           {/* Main Weather */}
-          <WeatherCard weather={weather} className="col-span-6 h-full" />
+          <WeatherCard weather={weather} forecast={foreCast} />
 
           {/* Right side forecast */}
-          <WeeklyForeCast className="col-span-6 h-full" />
+          <WeeklyForeCast />
 
           {/* Chart */}
-          <ForecastCard className="col-span-12" foreCastData={foreCast} />
+          <ForecastCard foreCastData={foreCast} />
 
           {/* Stats */}
-          <div className="col-span-8 bg-white rounded-xl shadow border border-gray-100 p-4 flex flex-col gap-4">
-            <div className="flex justify-between items-center px-4 pt-4">
+          <div
+            className="col-span-8 bg-white rounded-xl shadow
+           border border-gray-100 p-4 flex flex-col gap-4"
+          >
+            <div className="flex justify-between items-center px-4 pt-1">
               <h2 className="font-semibold mb-4">AIR CONDITION</h2>
               <p
                 className="text-lg mb-2 p-1 text-gray-50 rounded-xl bg-blue-500
@@ -58,26 +62,30 @@ const Dashboard = () => {
             </div>
 
             {weather && (
-              <div className="flex justify-between items-center ">
+              <div className="grid grid-cols-2 justify-between items-center gap-4">
                 <StatsCard
-                  title="Humanity"
-                  value={weather.main.humidity}
-                  icon="💧"
+                  title="Real Feel"
+                  value={`${Math.round(weather.main.feels_like)} °C`}
+                  // icon="🌡"
+                   icon={Droplets}
                 />
                 <StatsCard
                   title="Wind"
                   value={`${weather.wind.speed} km/h`}
-                  icon="🌬"
+                 // icon="🌬"
+                 icon={Wind}
                 />
                 <StatsCard
-                  title="Visibility"
-                  value={weather.visibility}
-                  icon="👁"
+                  title="Chance of rain"
+                  value={`${Math.round(foreCast[0].pop * 100)}%`}
+                 // icon="💧"
+                 icon={Droplets}
                 />
                 <StatsCard
                   title="Pressure"
                   value={weather.main.pressure}
-                  icon="🌡"
+                 // icon="☀️"
+                 icon={ArrowDownUp}
                 />
 
                 {/* <StatsCard title="Humidity" value="72%" icon="💧" />
