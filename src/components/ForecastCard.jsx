@@ -21,7 +21,7 @@ const getForeCastHours = (item) => {
 function ForecastCard({ foreCastData }) {
   return (
     <>
-      <div className="col-span-8 bg-white rounded-2xl p-3 shadow">
+      <div className="col-span-8 bg-white rounded-2xl p-2 shadow h-40">
         <h2 className="text-lg font-semibold mb-2">Todays Forecast</h2>
         <div className="grid grid-cols-8 gap-6 items-center justify-between">
           {foreCastData && foreCastData.length > 0 ? (
@@ -33,11 +33,7 @@ function ForecastCard({ foreCastData }) {
                 {console.log(item)}
                 <p className="text-sm text-gray-500">
                   {getForeCastHours(item)}
-                </p>
-                {/* {console.log(
-                  `https://openweathermap.org/payload/api/media/file/${item.weather[0].icon}.png`,
-                )} */}
-               
+                </p>               
                   <img
                     className="size-8"
                     src={`https://openweathermap.org/payload/api/media/file/${item.weather[0].icon}.png`}

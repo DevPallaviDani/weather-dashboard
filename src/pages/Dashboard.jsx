@@ -35,7 +35,7 @@ const Dashboard = () => {
       <div className="flex-3 p-6">
         <Header />
 
-        <div className="grid grid-cols-12 gap-12 mt-4 auto-rows-[140px]">
+        <div className="grid grid-cols-12 gap-6 mt-4 auto-rows-[140px]">
           {/* Main Weather */}
           <WeatherCard weather={weather} className="col-span-6" />
 
@@ -46,36 +46,46 @@ const Dashboard = () => {
           <ForecastCard foreCastData={foreCast} />
 
           {/* Stats */}
+          <div className="col-span-8 rounded-xl border-gray-100 hover:shadow-lg transition flex flex-col justify-between">
+            <div className="flex justify-between items-center px-4 pt-4">
+              <h2 className="font-semibold mb-4">AIR CONDITION</h2>
+              <p 
+              className="text-lg mb-2 p-1 text-gray-50 rounded-xl bg-blue-500
+              hover:cursor-pointer">See More</p>
+            </div>
 
-          {weather && (
-            <div className="justify-between col-span-8 row-span-2 grid grid-cols-2 grid-rows-2 gap-2 bg-white rounded-xl shadow border border-gray-100 hover:shadow-lg transition">
-              <StatsCard
-                title="Humanity"
-                value={weather.main.humidity}
-                icon="💧"
-              />
-              <StatsCard
-                title="Wind"
-                value={`${weather.wind.speed} km/h`}
-                icon="🌬"
-              />
-              <StatsCard
-                title="Visibility"
-                value={weather.visibility}
-                icon="☀️"
-              />
-              <StatsCard
-                title="Pressure"
-                value={weather.main.pressure}
-                icon="☀️"
-              />
+            {weather && (
+              <div
+               className="grid grid-cols-2 gap-4 px-4 pb-4"
+               >
+                <StatsCard
+                  title="Humanity"
+                  value={weather.main.humidity}
+                  icon="💧"
+                />
+                <StatsCard
+                  title="Wind"
+                  value={`${weather.wind.speed} km/h`}
+                  icon="🌬"
+                />
+                <StatsCard
+                  title="Visibility"
+                  value={weather.visibility}
+                  icon="☀️"
+                />
+                <StatsCard
+                  title="Pressure"
+                  value={weather.main.pressure}
+                  icon="☀️"
+                />
 
-              {/* <StatsCard title="Humidity" value="72%" icon="💧" />
+                {/* <StatsCard title="Humidity" value="72%" icon="💧" />
             <StatsCard title="Wind" value="5 km/h" icon="🌬" />
             <StatsCard title="UV Index" value="6" icon="☀️" />
             <StatsCard title="Pressure" value="1008Mb" icon="☀️" /> */}
-            </div>
-          )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
