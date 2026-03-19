@@ -6,30 +6,62 @@ import StatsCard from "../components/StatsCard";
 import ForecastCard from "../components/ForecastCard";
 import WeeklyForeCast from "../components/WeeklyForeCast";
 import { getWeather, getForeCast } from "../api/weather";
-import { Droplets, Wind, Gauge, ArrowDownUp, CloudRain, Thermometer } from "lucide-react";
+import {
+  Droplets,
+  Wind,
+  Gauge,
+  ArrowDownUp,
+  CloudRain,
+  Thermometer,
+} from "lucide-react";
 
 const Dashboard = () => {
   const [weather, setWeather] = useState(null);
   const [foreCast, setForeCast] = useState([]);
-let rainChance =null ;
+  const [loading, setLoading] = useState(true);
+  let rainChance = 0;
+
+  if (foreCast && foreCast.length > 0 && foreCast[0].pop !== undefined) {
+    rainChance = Math.round(foreCast[0].pop * 100);
+  }
   useEffect(() => {
+    <>
+      {/* // const fetchData =async()=>{
+    //   try {
+    //     const weatherData = await getWeather();
+    //     const foreCastData = await getForeCast();
+
+    //     setWeather(weatherData);
+    //     setForeCast(foreCastData?.list||[]);
+    //   } catch (error) {
+    //     console.error(error);
+    //   }finally{
+    //     setLoading(false);
+    //   };
+    //   fetchData()
+    // } */}
+    </>;
+
     try {
       getWeather("pune").then((data) => {
         setWeather(data);
       });
       getForeCast().then((foreCastData) => {
-        setForeCast(foreCastData.list);
+        // setForeCast(foreCastData.list);
+        setForeCast(foreCastData?.list || []);
       });
     } catch (error) {
       console.error(error);
       throw error;
     }
   }, []);
-  useEffect(() => {   
+  useEffect(() => {
     //  rainChance = Math.round((foreCast[0]?.pop ?? 0) * 100);
-      // console.log("Forecast data: ", foreCast);
+    // console.log("Forecast data: ", foreCast);
   }, [foreCast]);
-
+  if (!weather || !foreCast || foreCast.length === 0) {
+    return <div className="p-6">Loading...</div>;
+  }
   return (
     <div className="flex min-h-screen bg-gray-100">
       <Sidebar />
@@ -66,11 +98,12 @@ let rainChance =null ;
               <div className="grid grid-cols-2 justify-between items-center gap-4">
                 <StatsCard
                   title="Real Feel"
-                  value={`${Math.round(weather.main.feels_like)} °C`}
+                  value={`${Math.round(weather.main.feels_like)}°C`}
                   // icon="🌡"
                   icon={Thermometer}
                   iconColor={"red"}
                 />
+                {console.log(weather)}
                 <StatsCard
                   title="Wind"
                   value={`${weather.wind.speed} km/h`}
@@ -80,7 +113,7 @@ let rainChance =null ;
                 />
                 <StatsCard
                   title="Chance of rain"
-                  value={`${Math.round(foreCast[0].pop * 100)}%`}
+                  value={rainChance === 0 ? "No rain" : `${rainChance}%`}
                   // icon="💧"
                   icon={CloudRain}
                   iconColor={"blue"}
