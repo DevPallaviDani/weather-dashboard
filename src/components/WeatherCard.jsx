@@ -15,24 +15,19 @@ function WeatherCard({ weather, forecast }) {
               <span> {Math.round(forecast[0].pop * 100)}%</span>
             </p>
           </div>
-          {/* {console.log("POP from WeatherCard",forecast[0].pop)} */}
 
           <div className="grid content-end">
             <h2 className="text-7xl font-bold mt-1">
               {" "}
               {Math.round(weather.main.temp)}°C
             </h2>
-            {/* <p className="mt-2 text-lg">
-                {weather.weather[0].description} ☀️
-              </p> */}
           </div>
         </div>
         <div>
+
           {/* Weather Icon */}
-          {/* <div className="text-6xl">${weather.weather[0].icon}☀️</div> */}
           <img
             className="size-60  hover:shadow-black hover:scale-105 rounded-full  "
-            // bg-gradient-to-r from-slate-950 to-sky-950
             src={`https://openweathermap.org/payload/api/media/file/${weather.weather[0].icon}.png`}
             alt="weather"
           />
