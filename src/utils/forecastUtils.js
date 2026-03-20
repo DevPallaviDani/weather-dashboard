@@ -1,4 +1,4 @@
-export const getNext5Days = (list) => {
+export const getNext7Days = (list) => {
   if (!list || list.length === 0) return [];
 
   const next5Daysresult = [];
@@ -26,11 +26,11 @@ export const extendTo7Days = (next5Daysresult) => {
   for (let i = 1; i <= 2; i++) {
     const newDate = new Date(lastDay.dt_txt);
     newDate.setDate(newDate.getDate() + i);
-    console.log(newDate);
+    console.log("New date: ", newDate, "day: ", newDate.getDay());
 
     result.push({
       ...lastDay,
-      date: newDate,
+      dt_txt: newDate,
       isDummy: true, // mark as dummy
     });
   }

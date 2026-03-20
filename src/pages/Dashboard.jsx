@@ -6,7 +6,7 @@ import StatsCard from "../components/StatsCard";
 import ForecastCard from "../components/ForecastCard";
 import WeeklyForeCast from "../components/WeeklyForeCast";
 import { getWeather, getForeCast, getWeeklyForeCast } from "../api/weather";
-import { getNext5Days } from "../utils/forecastUtils";
+import { getNext7Days } from "../utils/forecastUtils";
 import {
   Droplets,
   Wind,
@@ -64,8 +64,8 @@ const Dashboard = () => {
         const weeklyForeCastData = await getWeeklyForeCast({ cityName });
 
         const list = weeklyForeCastData?.list || [];
-        // ✅ Filter next 5 days
-        const filteredWeeklyForecast = getNext5Days(list);
+        // ✅ Filter next 7 days
+        const filteredWeeklyForecast = getNext7Days(list);
 
         setWeather(weatherData);
         setForeCast(foreCastData?.list || []);
