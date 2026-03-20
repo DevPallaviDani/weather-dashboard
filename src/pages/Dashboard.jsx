@@ -23,7 +23,8 @@ const Dashboard = () => {
   const [weeklyForeCast, setWeeklyForeCast] = useState([]);
   const [city, setCity] = useState("Pune");
   const [loading, setLoading] = useState(true);
-  const [isSideBarOpen , setIsSideBarOpen]=useState(true)
+  const [isSideBarOpen, setIsSideBarOpen] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     <>
@@ -62,9 +63,21 @@ const Dashboard = () => {
     // ✅ Fetch Data (clean async/await)
     const fetchData = async () => {
       try {
+        // setError(""); //reset error
+
         const weatherData = await getWeather({ city });
         const foreCastData = await getForeCast({ city });
         const weeklyForeCastData = await getWeeklyForeCast({ city });
+
+        if (weatherData.cod === "404") {
+          setError(weatherData.message.toUpperCase());
+
+          setWeather(null);
+          setForeCast([]);
+          setWeeklyForeCast([]);
+
+          return;
+        }
 
         const list = weeklyForeCastData?.list || [];
         // ✅ Filter next 7 days
@@ -75,6 +88,7 @@ const Dashboard = () => {
         setWeeklyForeCast(filteredWeeklyForecast);
       } catch (error) {
         console.error("API Error:", error);
+        setError("Something went wrong!!");
       } finally {
         setLoading(false);
       }
@@ -82,6 +96,13 @@ const Dashboard = () => {
 
     fetchData();
   }, [city]);
+
+  // change in error
+  useEffect(() => {
+    if (error) {
+      alert(error);
+    }
+  }, [error]);
 
   // ✅ Rain Chance Calculation (safe)
   const rainChance =
@@ -93,15 +114,25 @@ const Dashboard = () => {
   if (loading) {
     return <div className="p-6">Loading weather data...</div>;
   }
+
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
-      <Sidebar isOpen ={isSideBarOpen}/>
+      <Sidebar isOpen={isSideBarOpen} />
 
       <div className="flex-1 p-1 md:p-4">
-        <Header onSearch={(city) => setCity(city)}
-         onToggleSidebar={() => setIsSideBarOpen(!isSideBarOpen)}/>
+        <Header
+          onSearch={(city) => setCity(city)}
+          onToggleSidebar={() => setIsSideBarOpen(!isSideBarOpen)}
+          error={error}
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-stretch">
+          {error && (
+            <div className="flex justify-between items-center bg-red-100 text-red-600 p-3 rounded-xl mb-4 w-full">
+              <span>{error}</span>
+              <button onClick={() => setError("")}>✖</button>
+            </div>
+          )}
           {/* Main Weather */}
           <WeatherCard weather={weather} forecast={foreCast} />
 
@@ -115,19 +146,19 @@ const Dashboard = () => {
           <div className="col-span-12 md:col-span-8 bg-white p-4 rounded-xl">
             <div className="flex justify-between items-center px-4 pt-1">
               <h2 className="font-semibold mb-4">AIR CONDITION</h2>
-              <p
+              {/* <p
                 className="text-lg mb-2 p-1 text-gray-50 rounded-xl bg-blue-500
               hover:cursor-pointer"
               >
                 See More
-              </p>
+              </p> */}
             </div>
 
             {weather && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-fr">
                 <StatsCard
                   title="Real Feel"
-                  value={`${Math.round(weather.main.feels_like)}°C`}
+                  value={`${Math.round(weather?.main?.feels_like)}°C`}
                   icon={Thermometer}
                   iconColor={"red"}
                 />

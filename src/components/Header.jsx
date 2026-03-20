@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MapPin, Search } from "lucide-react";
 import profile from "../assets/images/profileavatar.png";
-function Header({ onSearch }) {
+function Header({ onSearch ,error}) {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const handleSearch = () => {
@@ -28,7 +28,7 @@ function Header({ onSearch }) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-            className="flex-1 bg-transparent outline-none focus-within:bg-white "
+            className="flex-1 bg-transparent outline-none focus-within:bg-white border "
           />
           <Search
             className="cursor-pointer text-gray-500"

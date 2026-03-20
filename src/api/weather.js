@@ -1,5 +1,5 @@
 let API_KEY = "1c3de1e7fcd103fffec5735b2557cb78"; //openweather
-// let city = "Pune";
+
 
 export const getWeather = async ({ city }) => {
   try {

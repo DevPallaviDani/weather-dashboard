@@ -1,4 +1,3 @@
-
 import React from "react";
 
 function WeatherCard({ weather, forecast }) {
@@ -9,7 +8,8 @@ function WeatherCard({ weather, forecast }) {
         {/* Top section */}
         <div className="grid gap-8 p-2">
           <div>
-            <h1 className="text-2xl md:text-5xl font-bold">{weather.name}</h1>
+            {/* <h1 className="text-2xl md:text-5xl font-bold">{weather.name}</h1> */}
+            <h2 className="text-2xl md:text-5xl font-bold">{weather?.name || city}</h2>
 
             <p className="text-sm text-gray-400 p-1">
               {weather.weather[0].description} | Chance of rain:
