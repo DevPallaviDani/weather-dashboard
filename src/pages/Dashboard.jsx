@@ -128,12 +128,7 @@ const Dashboard = () => {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-stretch">
-          {error && (
-            <div className="flex justify-between items-center bg-red-100 text-red-600 p-3 rounded-xl mb-4 w-full">
-              <span>{error}</span>
-              <button onClick={() => setError("")}>✖</button>
-            </div>
-          )}
+         
           {/* Main Weather */}
           <WeatherCard weather={weather} forecast={foreCast} />
 
