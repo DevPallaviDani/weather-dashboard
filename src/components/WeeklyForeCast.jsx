@@ -1,5 +1,5 @@
 import React from "react";
-
+import {getWeatherDayFromDate} from "../utils/dateUtils"
 const forecast = [
   { day: "Mon", icon: "☀️", max: 28, min: 20 },
   { day: "Tue", icon: "🌧", max: 26, min: 19 },
@@ -10,30 +10,37 @@ const forecast = [
   // { day: "Sun", icon: "🌦", max: 27, min: 21 },
 ];
 
-function WeeklyForeCast() {
+function WeeklyForeCast({ weeklyForeCast }) {
+  console.log("Weekly fore cast: ", weeklyForeCast);
+
   return (
     <>
-      <div 
-      className="col-span-4 row-span-3 bg-white rounded-2xl p-6 shadow"
-     
-      >
+      <div className="col-span-4 row-span-3 bg-white rounded-2xl p-6 shadow">
         <h2 className="text-lg font-semibold mb-4">Next Days</h2>
 
-        <div className="space-y-14"
-        >
-          {forecast.map((item, index) => (
+        <div className="space-y-14">
+          {weeklyForeCast.map((weather, index) => (
+           
             <div
               key={index}
               className="flex items-center justify-between p-6 hover:bg-gray-50
                transition border-b-2 border-gray-200 last:border-none"
             >
+             
+              {console.log("weather day: ", getWeatherDayFromDate(weather.dt_txt))}
               {/* day  */}
-              <span className="text-gray-500 w-10">{item.day}</span>
+              <span className="text-gray-500 w-10 font-semibold">{(getWeatherDayFromDate(weather.dt_txt))}</span>
+           
               {/* icon */}
-              <span className="text-xl">{item.icon}</span>
+              <img
+                className="size-8"
+                src={`https://openweathermap.org/payload/api/media/file/${weather.weather[0].icon}.png`}
+                alt="weather"
+              />
+
               {/* temp */}
               <span className="text-sm font-medium">
-                {item.max}/{item.min}
+                {`${Math.round(weather.main.temp_max)}°C/${Math.round(weather.main.temp_min)}°C`}
               </span>
             </div>
           ))}

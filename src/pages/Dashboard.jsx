@@ -5,7 +5,8 @@ import WeatherCard from "../components/WeatherCard";
 import StatsCard from "../components/StatsCard";
 import ForecastCard from "../components/ForecastCard";
 import WeeklyForeCast from "../components/WeeklyForeCast";
-import { getWeather, getForeCast } from "../api/weather";
+import { getWeather, getForeCast, getWeeklyForeCast } from "../api/weather";
+import { getNext5Days } from "../utils/forecastUtils";
 import {
   Droplets,
   Wind,
@@ -14,35 +15,31 @@ import {
   CloudRain,
   Thermometer,
 } from "lucide-react";
-
+const cityName = "Pune";
 const Dashboard = () => {
   const [weather, setWeather] = useState(null);
   const [foreCast, setForeCast] = useState([]);
+  const [weeklyForeCast, setWeeklyForeCast] = useState([]);
   const [loading, setLoading] = useState(true);
-  let rainChance = 0;
 
-  if (foreCast && foreCast.length > 0 && foreCast[0].pop !== undefined) {
-    rainChance = Math.round(foreCast[0].pop * 100);
-  }
   useEffect(() => {
     <>
-      {/* // const fetchData =async()=>{
-    //   try {
-    //     const weatherData = await getWeather();
-    //     const foreCastData = await getForeCast();
+      {/* const fetchData =async()=>{
+      try {
+        const weatherData = await getWeather();
+        const foreCastData = await getForeCast();
 
-    //     setWeather(weatherData);
-    //     setForeCast(foreCastData?.list||[]);
-    //   } catch (error) {
-    //     console.error(error);
-    //   }finally{
-    //     setLoading(false);
-    //   };
-    //   fetchData()
-    // } */}
-    </>;
+        setWeather(weatherData);
+        setForeCast(foreCastData?.list||[]);
+      } catch (error) {
+        console.error(error);
+      }finally{
+        setLoading(false);
+      };
+      fetchData()
+    }  */}
 
-    try {
+      {/* try {
       getWeather("pune").then((data) => {
         setWeather(data);
       });
@@ -50,17 +47,49 @@ const Dashboard = () => {
         // setForeCast(foreCastData.list);
         setForeCast(foreCastData?.list || []);
       });
+
+      // const dailyForeCast = getNext5Days(foreCast?.list || []);
+      // setForeCast(dailyForeCast);
     } catch (error) {
       console.error(error);
       throw error;
-    }
+    } */}
+    </>;
+
+    // ✅ Fetch Data (clean async/await)
+    const fetchData = async () => {
+      try {
+        const weatherData = await getWeather({ cityName });
+        const foreCastData = await getForeCast({ cityName });
+        const weeklyForeCastData = await getWeeklyForeCast({ cityName });
+
+        const list = weeklyForeCastData?.list || [];
+        // ✅ Filter next 5 days
+        const filteredWeeklyForecast = getNext5Days(list);
+
+        setWeather(weatherData);
+        setForeCast(foreCastData?.list || []);
+        setWeeklyForeCast(filteredWeeklyForecast);
+      
+      } catch (error) {
+        console.error("API Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
-  useEffect(() => {
-    //  rainChance = Math.round((foreCast[0]?.pop ?? 0) * 100);
-    // console.log("Forecast data: ", foreCast);
-  }, [foreCast]);
-  if (!weather || !foreCast || foreCast.length === 0) {
-    return <div className="p-6">Loading...</div>;
+
+  // ✅ Rain Chance Calculation (safe)
+  const rainChance =
+    foreCast?.length > 0 && foreCast[0]?.pop !== undefined
+      ? Math.round(foreCast[0].pop * 100)
+      : 0;
+
+  // ✅ Loading UI
+  if (loading) {
+    return <div className="p-6">Loading weather data...</div>;
   }
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -74,7 +103,7 @@ const Dashboard = () => {
           <WeatherCard weather={weather} forecast={foreCast} />
 
           {/* Right side forecast */}
-          <WeeklyForeCast />
+          <WeeklyForeCast weeklyForeCast={weeklyForeCast} />
 
           {/* Chart */}
           <ForecastCard foreCastData={foreCast} />
