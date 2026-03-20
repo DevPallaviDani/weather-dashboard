@@ -11,7 +11,7 @@ function Sidebar({ isOpen, onToggleSidebar }) {
   return (
     <>
       <div
-        className={`bg-gradient-to-r from-slate-950 to-sky-950 text-white min-h-screen transition-all duration-300 
+        className={`hidden md:block md:w-64 h-auto md:h-screen bg-gradient-to-r from-slate-950 to-sky-950 text-white transition-all duration-300 
       ${isOpen ? "w-64 p-4" : "w-20 p-2"} 
       rounded-tr-3xl rounded-br-3xl`}
       >
