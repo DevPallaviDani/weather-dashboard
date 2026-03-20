@@ -1,65 +1,63 @@
 import React from "react";
-import { Home, CloudSun, BarChart3, Settings } from "lucide-react";
-
-function Sidebar({ isOpen }) {
+import {
+  Home,
+  CloudSun,
+  BarChart3,
+  Settings,
+  LucideSidebar,
+} from "lucide-react";
+import SidebarItem from "../components/SidebarItem";
+function Sidebar({ isOpen, onToggleSidebar }) {
   return (
     <>
       <div
-        className={`bg-white shadow min-h-screen transition-all duration-300 
-      ${isOpen ? "w-64 p-4" : "w-0 p-0 overflow-hidden"} hover:scale-105 rounded-br-3xl rounded-tr-3xl bg-gradient-to-r from-slate-950 to-sky-950`}
-        // className="hidden md:block md:w-64 bg-black text-white p-6
-        //  hover:scale-105 rounded-br-3xl rounded-tr-3xl bg-gradient-to-r from-slate-950 to-sky-950"
+        className={`bg-gradient-to-r from-slate-950 to-sky-950 text-white min-h-screen transition-all duration-300 
+      ${isOpen ? "w-64 p-4" : "w-20 p-2"} 
+      rounded-tr-3xl rounded-br-3xl`}
       >
-        {isOpen && (
-          <div>
-            <h1 className="font-bold mb-6 text-lime-600 mt-8">Weather Nova</h1>
-            <nav className="flex flex-col gap-4 ">
-              <div className="flex items-center gap-3 text-gray-100 hover:text-indigo-600 cursor-pointer">
-                <Home size={20} />
-                <span>Dashboard</span>
-              </div>
+        {/* Logo */}
+        {/* Top Section (Logo + Toggle) */}
+        <div className="flex items-center justify-between mt-8 mb-6">
+          {/* Logo */}
+          <h1
+            className={`font-bold text-lime-400 transition-all duration-300 ${
+              isOpen ? "text-lg" : "text-sm text-center w-full"
+            }`}
+          >
+            {isOpen ? "Weather Nova" : "WN"}
+          </h1>
 
-              <div className="flex items-center gap-3 text-gray-100 hover:text-indigo-600 cursor-pointer">
-                <CloudSun size={20} />
-                <span>Weather</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-100 hover:text-indigo-600 cursor-pointer">
-                <BarChart3 size={20} />
-                <span> Analytics</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-100 hover:text-indigo-600 cursor-pointer">
-                <Settings size={20} />
-                <span>Settings</span>
-              </div>
-            </nav>
-          </div>
-        )}
-        <>
-        
-        {/* Logo   */}
-        {/* <h1 className="font-bold mb-6 text-lime-600 mt-8">Weather Nova</h1> */}
+          {/* Toggle Button */}
+          <LucideSidebar
+            className="cursor-pointer text-gray-300"
+            onClick={onToggleSidebar}
+          />
+        </div>
 
         {/* Menu */}
-        {/* <nav className="flex flex-col gap-4 ">
-          <div className="flex items-center gap-3 text-gray-100 hover:text-indigo-600 cursor-pointer">
-            <Home size={20} />
-            <span>Dashboard</span>
-          </div>
-
-          <div className="flex items-center gap-3 text-gray-100 hover:text-indigo-600 cursor-pointer">
-            <CloudSun size={20} />
-            <span>Weather</span>
-          </div>
-          <div className="flex items-center gap-3 text-gray-100 hover:text-indigo-600 cursor-pointer">
-            <BarChart3 size={20} />
-            <span> Analytics</span>
-          </div>
-          <div className="flex items-center gap-3 text-gray-100 hover:text-indigo-600 cursor-pointer">
-            <Settings size={20} />
-            <span>Settings</span>
-          </div>
-        </nav> */}
-        </>
+        <nav className="flex flex-col gap-6">
+          {/* Item */}
+          <SidebarItem
+            icon={<Home size={20} />}
+            label="Dashboard"
+            isOpen={isOpen}
+          />
+          <SidebarItem
+            icon={<CloudSun size={20} />}
+            label="Weather"
+            isOpen={isOpen}
+          />
+          <SidebarItem
+            icon={<BarChart3 size={20} />}
+            label="Analytics"
+            isOpen={isOpen}
+          />
+          <SidebarItem
+            icon={<Settings size={20} />}
+            label="Settings"
+            isOpen={isOpen}
+          />
+        </nav>
       </div>
     </>
   );

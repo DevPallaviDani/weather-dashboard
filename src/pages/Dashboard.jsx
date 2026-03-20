@@ -117,7 +117,8 @@ const Dashboard = () => {
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
-      <Sidebar isOpen={isSideBarOpen} />
+      <Sidebar isOpen={isSideBarOpen} 
+     onToggleSidebar={() => setIsSideBarOpen(!isSideBarOpen)} />
 
       <div className="flex-1 p-1 md:p-4">
         <Header
