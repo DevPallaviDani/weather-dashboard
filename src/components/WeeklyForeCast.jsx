@@ -1,5 +1,5 @@
 import React from "react";
-import { getWeatherDayFromDate, getDayLabel } from "../utils/dateUtils";
+import {  getDayLabel } from "../utils/dateUtils";
 <>
   {/* Dummy Data
 const forecast = [

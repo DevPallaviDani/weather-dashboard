@@ -26,7 +26,6 @@ export const extendTo7Days = (next5Daysresult) => {
   for (let i = 1; i <= 2; i++) {
     const newDate = new Date(lastDay.dt_txt);
     newDate.setDate(newDate.getDate() + i);
-    console.log("New date: ", newDate, "day: ", newDate.getDay());
 
     result.push({
       ...lastDay,

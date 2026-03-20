@@ -18,7 +18,7 @@ export const getForeCast = async ({ cityName }) => {
     const api_forecast_url = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${API_KEY}&units=metric&cnt=8`;
     const resp = await fetch(api_forecast_url);
     const forecastData = await resp.json();
-    // console.log(`this is forecastdata ${forecastData}`);
+
     return forecastData;
   } catch (error) {
     console.error(error);
@@ -31,8 +31,6 @@ export const getWeeklyForeCast = async ({ cityName }) => {
 
     const response = await fetch(api_weeklyForeCast_url);
     const weeklyForeCast = await response.json();
-
-    console.log(weeklyForeCast);
 
     return weeklyForeCast;
   } catch (error) {

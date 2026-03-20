@@ -70,7 +70,6 @@ const Dashboard = () => {
         setWeather(weatherData);
         setForeCast(foreCastData?.list || []);
         setWeeklyForeCast(filteredWeeklyForecast);
-      
       } catch (error) {
         console.error("API Error:", error);
       } finally {
@@ -128,7 +127,6 @@ const Dashboard = () => {
                 <StatsCard
                   title="Real Feel"
                   value={`${Math.round(weather.main.feels_like)}°C`}
-                  // icon="🌡"
                   icon={Thermometer}
                   iconColor={"red"}
                 />
@@ -136,30 +134,22 @@ const Dashboard = () => {
                 <StatsCard
                   title="Wind"
                   value={`${weather.wind.speed} km/h`}
-                  // icon="🌬"
                   icon={Wind}
                   iconColor={"gray"}
                 />
                 <StatsCard
                   title="Chance of rain"
                   value={rainChance === 0 ? "No rain" : `${rainChance}%`}
-                  // icon="💧"
                   icon={CloudRain}
                   iconColor={"blue"}
                 />
-                {/* {console.log("POP from Dashboard",foreCast[0].pop)} */}
+
                 <StatsCard
                   title="Pressure"
                   value={weather.main.pressure}
-                  // icon="☀️"
                   icon={ArrowDownUp}
                   iconColor={"black"}
                 />
-
-                {/* <StatsCard title="Humidity" value="72%" icon="💧" />
-            <StatsCard title="Wind" value="5 km/h" icon="🌬" />
-            <StatsCard title="UV Index" value="6" icon="☀️" />
-            <StatsCard title="Pressure" value="1008Mb" icon="☀️" /> */}
               </div>
             )}
           </div>
