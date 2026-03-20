@@ -15,12 +15,15 @@ import {
   CloudRain,
   Thermometer,
 } from "lucide-react";
-const cityName = "Pune";
+import { flushSync } from "react-dom";
+
 const Dashboard = () => {
   const [weather, setWeather] = useState(null);
   const [foreCast, setForeCast] = useState([]);
   const [weeklyForeCast, setWeeklyForeCast] = useState([]);
+  const [city, setCity] = useState("Pune");
   const [loading, setLoading] = useState(true);
+  const [isSideBarOpen , setIsSideBarOpen]=useState(true)
 
   useEffect(() => {
     <>
@@ -59,9 +62,9 @@ const Dashboard = () => {
     // ✅ Fetch Data (clean async/await)
     const fetchData = async () => {
       try {
-        const weatherData = await getWeather({ cityName });
-        const foreCastData = await getForeCast({ cityName });
-        const weeklyForeCastData = await getWeeklyForeCast({ cityName });
+        const weatherData = await getWeather({ city });
+        const foreCastData = await getForeCast({ city });
+        const weeklyForeCastData = await getWeeklyForeCast({ city });
 
         const list = weeklyForeCastData?.list || [];
         // ✅ Filter next 7 days
@@ -78,7 +81,7 @@ const Dashboard = () => {
     };
 
     fetchData();
-  }, []);
+  }, [city]);
 
   // ✅ Rain Chance Calculation (safe)
   const rainChance =
@@ -91,13 +94,14 @@ const Dashboard = () => {
     return <div className="p-6">Loading weather data...</div>;
   }
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      <Sidebar />
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
+      <Sidebar isOpen ={isSideBarOpen}/>
 
-      <div className="flex-3 p-3">
-        <Header />
+      <div className="flex-1 p-1 md:p-4">
+        <Header onSearch={(city) => setCity(city)}
+         onToggleSidebar={() => setIsSideBarOpen(!isSideBarOpen)}/>
 
-        <div className="grid grid-cols-12 gap-4 items-end">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-stretch">
           {/* Main Weather */}
           <WeatherCard weather={weather} forecast={foreCast} />
 
@@ -108,10 +112,7 @@ const Dashboard = () => {
           <ForecastCard foreCastData={foreCast} />
 
           {/* Stats */}
-          <div
-            className="col-span-8 bg-white rounded-xl shadow
-           border border-gray-100 p-4 flex flex-col gap-4"
-          >
+          <div className="col-span-12 md:col-span-8 bg-white p-4 rounded-xl">
             <div className="flex justify-between items-center px-4 pt-1">
               <h2 className="font-semibold mb-4">AIR CONDITION</h2>
               <p
@@ -123,7 +124,7 @@ const Dashboard = () => {
             </div>
 
             {weather && (
-              <div className="grid grid-cols-2 justify-between items-center gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-fr">
                 <StatsCard
                   title="Real Feel"
                   value={`${Math.round(weather.main.feels_like)}°C`}

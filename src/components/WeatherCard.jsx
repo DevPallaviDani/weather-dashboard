@@ -1,63 +1,36 @@
-import { Droplets, Wind, Gauge } from "lucide-react";
+
 import React from "react";
-const cityName = "Pune";
+
 function WeatherCard({ weather, forecast }) {
   if (!weather) return null;
   return (
     <>
-      <div className="flex justify-between col-span-8 p-2 text-gray-700 bg-white rounded-2xl min-h-fit">
+      <div className="col-span-12 md:col-span-8 bg-white rounded-2xl p-4 flex justify-between items-center">
         {/* Top section */}
-        <div className="grid gap-4 p-2">
+        <div className="grid gap-8 p-2">
           <div>
-            <h1 className="font-bold text-5xl">{cityName}</h1>
-            <p className="text-sm text-gray-400">
-              Chance of rain:
+            <h1 className="text-2xl md:text-5xl font-bold">{weather.name}</h1>
+
+            <p className="text-sm text-gray-400 p-1">
+              {weather.weather[0].description} | Chance of rain:
               <span> {Math.round(forecast[0].pop * 100)}%</span>
             </p>
           </div>
 
           <div className="grid content-end">
-            <h2 className="text-7xl font-bold mt-1">
+            <h2 className="text-4xl md:text-7xl font-bold mt-2">
               {" "}
               {Math.round(weather.main.temp)}°C
             </h2>
           </div>
         </div>
-        <div>
 
-          {/* Weather Icon */}
-          <img
-            className="size-60  hover:shadow-black hover:scale-105 rounded-full  "
-            src={`https://openweathermap.org/payload/api/media/file/${weather.weather[0].icon}.png`}
-            alt="weather"
-          />
-        </div>
-        {/* Bottom stats */}
-        {/* <div className="grid grid-cols-3 gap-6 mt-10">
-          <div className="flex items-center gap-2">
-            <Droplets />
-            <div>
-              <p className="text-sm opacity-80">Humidity</p>
-              <p className="font-semibold">72%</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Wind />
-            <div>
-              <p className="text-sm opacity-80">Wind</p>
-              <p className="font-semibold">5 km/h</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Gauge />
-            <div>
-              <p className="text-sm opacity-80">Pressure</p>
-              <p className="font-semibold">1008 mb</p>
-            </div>
-          </div>
-        </div> */}
+        {/* Weather Icon */}
+        <img
+          className="w-20 h-20 sm:w-28 sm:h-28 md:w-52 md:h-52 object-contain hover:shadow-black hover:scale-105 rounded-full  "
+          src={`https://openweathermap.org/payload/api/media/file/${weather.weather[0].icon}.png`}
+          alt="weather"
+        />
       </div>
     </>
   );

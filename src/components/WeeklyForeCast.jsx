@@ -1,5 +1,5 @@
 import React from "react";
-import {  getDayLabel } from "../utils/dateUtils";
+import { getDayLabel } from "../utils/dateUtils";
 <>
   {/* Dummy Data
 const forecast = [
@@ -16,15 +16,15 @@ const forecast = [
 function WeeklyForeCast({ weeklyForeCast = [] }) {
   if (!weeklyForeCast.length) {
     return (
-      <div className="col-span-4 row-span-3 bg-white rounded-2xl p-6 shadow">
-        <h2 className="text-lg font-semibold mb-4">Next Days</h2>
+      <div className="col-span-12 md:col-span-4 bg-white rounded-2xl p-4 shadow">
+        <h2 className=" font-semibold mb-4">Next Days</h2>
         <p className="text-gray-400">No forecast data available</p>
       </div>
     );
   }
 
   return (
-    <div className="col-span-4 row-span-3 bg-white rounded-2xl p-6 shadow">
+    <div className="col-span-12 md:col-span-4 row-span-3 bg-white rounded-2xl p-6 shadow">
       <h2 className="text-lg font-semibold mb-4">Next Days</h2>
 
       <div>
@@ -61,13 +61,12 @@ function WeeklyForeCast({ weeklyForeCast = [] }) {
 
               {/* Temp */}
               <span className="text-sm font-medium">
-                {maxTemp}°C / {minTemp}°C 
+                {maxTemp}°C / {minTemp}°C
+                {/* Dummy label */}
+                {day?.isDummy && (
+                  <p className="text-xs text-gray-400">(est.)</p>
+                )}
               </span>
-
-              {/* Dummy label */}
-              {/* {day?.isDummy && (
-                <span className="text-xs text-gray-400">(est.)</span>
-              )} */}
             </div>
           );
         })}

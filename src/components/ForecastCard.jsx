@@ -21,14 +21,17 @@ const getForeCastHours = (item) => {
 function ForecastCard({ foreCastData }) {
   return (
     <>
-      <div className="col-span-8 bg-white rounded-2xl p-2 shadow h-44">
-        <h2 className="text-lg font-semibold mb-2">Todays Forecast</h2>
-        <div className="grid grid-cols-8 gap-6 items-center justify-between">
+      <div className="col-span-12 md:col-span-8 bg-white rounded-2xl p-2">
+        <h2 className="font-semibold mb-4">Todays Forecast</h2>
+        <div className="flex gap-4 overflow-x-auto justify-between ml-2"
+        // className="grid grid-cols-8 gap-6 items-center justify-between"
+        >
           {foreCastData && foreCastData.length > 0 ? (
             foreCastData.map((item, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center p-4
+                // className="min-w-[80px] text-center"
+                className="flex flex-col items-center p-3 gap-2 
                  border-r-2 border-gray-200 last:border-none  hover:bg-gray-50 transition"
               >               
                 <p className="text-sm text-gray-500">
