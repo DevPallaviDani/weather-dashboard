@@ -38,7 +38,7 @@ function WeatherCard({ weather, forecast, city }) {
 
         {/* Weather Icon */}
         <img
-          className="w-20 h-20 sm:w-28 sm:h-28 md:w-52 md:h-52 object-contain hover:shadow-black hover:scale-105 rounded-full  "
+          className="w-20 h-20 sm:w-28 sm:h-28 md:w-52 md:h-52 object-contain hover:shadow-black hover:scale-105 rounded-full "
           src={
             weather?.weather?.[0]?.icon
               ? `https://openweathermap.org/img/wn/${weather?.weather?.[0]?.icon}@2x.png`

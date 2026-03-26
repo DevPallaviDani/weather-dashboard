@@ -15,9 +15,9 @@ function ThemeToggle() {
     <div>
       <button
         onClick={() => setDarkMode(!darkMode)}
-        className="p-2 rounded-full bg-gray-200 dark:bg-gray-700"
+        className="p-2 rounded-full bg-transparent "
       >
-        {darkMode ? <Moon size={18} /> : <Sun size={18} />}
+        {darkMode ? <Moon size={25} /> : <Sun size={25} />}
       </button>
     </div>
   );

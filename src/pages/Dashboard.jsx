@@ -63,7 +63,7 @@ const Dashboard = ({ location }) => {
 
   return (
     <div
-      className="flex flex-col md:flex-row bg-gray-100 dark:text-gray-400 dark:bg-black min-h-screen  
+      className="flex flex-col md:flex-row bg-gray-200 dark:text-gray-400 dark:bg-black min-h-screen  
          transition-all duration-700"
     >
       {/* <Sidebar
@@ -101,7 +101,7 @@ const Dashboard = ({ location }) => {
             {weather && (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 auto-rows-fr">
                 <StatsCard
-                  title="Real Feel"
+                  title="Feels Like"
                   value={`${Math.round(weather?.main?.feels_like)}°C`}
                   icon={Thermometer}
                   iconColor={"gray"}
