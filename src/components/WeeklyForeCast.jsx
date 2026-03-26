@@ -1,4 +1,5 @@
 import React from "react";
+import SunCycle from "./SunCycle";
 import { getDayLabel } from "../utils/dateUtils";
 <>
   {/* Dummy Data
@@ -13,10 +14,10 @@ const forecast = [
 ]; */}
 </>;
 
-function WeeklyForeCast({ weeklyForeCast = [] }) {
+function WeeklyForeCast({ weeklyForeCast = [], weather }) {
   if (!weeklyForeCast.length) {
     return (
-      <div className="col-span-12 md:col-span-4 bg-white rounded-2xl p-4 shadow">
+      <div className="col-span-12 md:col-span-4 bg-white rounded-2xl p-4 shadow  dark:bg-gray-800">
         <h2 className=" font-semibold mb-4">Next Days</h2>
         <p className="text-gray-400">No forecast data available</p>
       </div>
@@ -24,7 +25,7 @@ function WeeklyForeCast({ weeklyForeCast = [] }) {
   }
 
   return (
-    <div className="col-span-12 md:col-span-4 row-span-3 bg-white rounded-2xl p-6 shadow">
+    <div className="col-span-12 md:col-span-4 row-span-3 bg-white rounded-2xl p-6 shadow  dark:bg-gray-800">
       <h2 className="text-lg font-semibold mb-4">Next Days</h2>
 
       <div>
@@ -42,13 +43,13 @@ function WeeklyForeCast({ weeklyForeCast = [] }) {
           return (
             <div
               key={index}
-              className="flex items-center justify-between p-6 hover:bg-gray-50
-                transition border-b-2 border-gray-200 last:border-none"
+              className="flex items-center justify-between p-6 hover:bg-gray-50 hover:rounded-md
+                transition border-b-2 border-gray-200 last:border-none  dark:border-gray-600 dark:hover:bg-gray-600"
             >
               {/* Day */}
               <span
                 className={`w-12 font-semibold ${
-                  label === "Today" ? "text-blue-500" : "text-gray-500"
+                  label === "Today" ? "text-blue-500" : "text-gray-600"
                 }`}
               >
                 {label}
@@ -61,7 +62,8 @@ function WeeklyForeCast({ weeklyForeCast = [] }) {
 
               {/* Temp */}
               <span className="text-sm font-medium">
-                {maxTemp}°C / {minTemp}°C
+               <span className="text-gray-800 dark:text-gray-400">{maxTemp}°C</span>  / 
+               <span className=" text-gray-600 dark:text-gray-500">{minTemp}°C</span>
                 {/* Dummy label */}
                 {day?.isDummy && (
                   <p className="text-xs text-gray-400">(est.)</p>

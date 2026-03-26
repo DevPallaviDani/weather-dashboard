@@ -1,6 +1,6 @@
 export const getWeatherTheme = (type) => {
   switch (type) {
-    case value:
+    
     case "Clear":
       return "from-yellow-300 via-orange-400 to-pink-500"; // ☀️ sunny
 

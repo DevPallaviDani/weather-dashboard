@@ -1,4 +1,5 @@
 import React from "react";
+import SunCycle from "./SunCycle";
 
 function WeatherCard({ weather, forecast, city }) {
   // ✅ Guard (important)
@@ -9,7 +10,7 @@ function WeatherCard({ weather, forecast, city }) {
     forecast?.[0]?.pop !== undefined ? Math.round(forecast[0].pop * 100) : 0;
   return (
     <>
-      <div className="col-span-12 md:col-span-8 bg-white rounded-2xl p-4 flex justify-between items-center">
+      <div className="col-span-12 md:col-span-8 bg-transparent text-gray-500 dark:text-gray-100 rounded-2xl p-4 flex justify-between items-center ">
         {/* Top section */}
         <div className="grid gap-8 p-2">
           <div>
@@ -19,11 +20,12 @@ function WeatherCard({ weather, forecast, city }) {
             </h2>
 
             <p className="text-sm text-gray-400 p-1">
-                {weather?.weather?.[0]?.description || "Loading..."} | Chance of rain:
+              {weather?.weather?.[0]?.description || "Loading..."} | Chance of
+              rain:
               <span> {rainChance}%</span>
             </p>
           </div>
-
+         
           <div className="grid content-end">
             <h2 className="text-4xl md:text-7xl font-bold mt-2">
               {mainWeather?.temp !== undefined
@@ -44,7 +46,9 @@ function WeatherCard({ weather, forecast, city }) {
           }
           alt="weather"
         />
+        
       </div>
+      
     </>
   );
 }
