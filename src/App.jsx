@@ -1,14 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Dashboard from "./pages/Dashboard";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [location, setLocation] = useState(null);
 
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          });
+        },
+        (error) => {
+          console.log("Error getting location: ", error);
+        },
+      );
+    } else {
+      console.log("Geolocation not supported.");
+    }
+  }, []);
   return (
     <>
-      <div>
-        <Dashboard />
-      </div>
+      {location ? (        
+        <div>
+          {console.log(location)}
+          <Dashboard location={location}/>
+        </div>
+      ) : (
+        <p>Fetching location....</p>
+      )}
     </>
   );
 }

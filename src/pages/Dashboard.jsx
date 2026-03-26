@@ -5,8 +5,8 @@ import WeatherCard from "../components/WeatherCard";
 import StatsCard from "../components/StatsCard";
 import ForecastCard from "../components/ForecastCard";
 import WeeklyForeCast from "../components/WeeklyForeCast";
-import { getWeather, getForeCast, getWeeklyForeCast } from "../api/weather";
-import { getNext7Days } from "../utils/forecastUtils";
+import { useWeather } from "../hooks/useWeather";
+
 import {
   Droplets,
   Wind,
@@ -15,87 +15,29 @@ import {
   CloudRain,
   Thermometer,
 } from "lucide-react";
-import { flushSync } from "react-dom";
 
-const Dashboard = () => {
-  const [weather, setWeather] = useState(null);
-  const [foreCast, setForeCast] = useState([]);
-  const [weeklyForeCast, setWeeklyForeCast] = useState([]);
-  const [city, setCity] = useState("Pune");
-  const [loading, setLoading] = useState(true);
+const Dashboard = ({ location }) => {
+  const {
+    weather,
+    foreCast,
+    weeklyForeCast,
+    loading,
+    error,
+    city,
+    setCity,
+    setIsUsingLocation,
+  } = useWeather(location);
+
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
-  const [error, setError] = useState("");
 
-  useEffect(() => {
-    <>
-      {/* const fetchData =async()=>{
-      try {
-        const weatherData = await getWeather();
-        const foreCastData = await getForeCast();
-
-        setWeather(weatherData);
-        setForeCast(foreCastData?.list||[]);
-      } catch (error) {
-        console.error(error);
-      }finally{
-        setLoading(false);
-      };
-      fetchData()
-    }  */}
-
-      {/* try {
-      getWeather("pune").then((data) => {
-        setWeather(data);
-      });
-      getForeCast().then((foreCastData) => {
-        // setForeCast(foreCastData.list);
-        setForeCast(foreCastData?.list || []);
-      });
-
-      // const dailyForeCast = getNext5Days(foreCast?.list || []);
-      // setForeCast(dailyForeCast);
-    } catch (error) {
-      console.error(error);
-      throw error;
-    } */}
-    </>;
-
-    // ✅ Fetch Data (clean async/await)
-    const fetchData = async () => {
-      try {
-        // setError(""); //reset error
-
-        const weatherData = await getWeather({ city });
-        const foreCastData = await getForeCast({ city });
-        const weeklyForeCastData = await getWeeklyForeCast({ city });
-
-        if (weatherData.cod === "404") {
-          setError(weatherData.message.toUpperCase());
-
-          setWeather(null);
-          setForeCast([]);
-          setWeeklyForeCast([]);
-
-          return;
-        }
-
-        const list = weeklyForeCastData?.list || [];
-        // ✅ Filter next 7 days
-        const filteredWeeklyForecast = getNext7Days(list);
-
-        setWeather(weatherData);
-        setForeCast(foreCastData?.list || []);
-        setWeeklyForeCast(filteredWeeklyForecast);
-      } catch (error) {
-        console.error("API Error:", error);
-        setError("Something went wrong!!");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [city]);
+  const handleSearch = (city) => {
+    if (!city.trim()) return;
+    setCity(city);
+    setIsUsingLocation(false);
+  };
+  const handleUseLocation = () => {
+    setIsUsingLocation(true);
+  };
 
   // change in error
   useEffect(() => {
@@ -106,31 +48,31 @@ const Dashboard = () => {
 
   // ✅ Rain Chance Calculation (safe)
   const rainChance =
-    foreCast?.length > 0 && foreCast[0]?.pop !== undefined
-      ? Math.round(foreCast[0].pop * 100)
-      : 0;
+    foreCast?.[0]?.pop !== undefined ? Math.round(foreCast[0].pop * 100) : 0;
 
   // ✅ Loading UI
-  if (loading) {
-    return <div className="p-6">Loading weather data...</div>;
-  }
+  if (loading) return <div className="p-6">Loading...</div>;
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
-      <Sidebar isOpen={isSideBarOpen} 
-     onToggleSidebar={() => setIsSideBarOpen(!isSideBarOpen)} />
+      <Sidebar
+        isOpen={isSideBarOpen}
+        onToggleSidebar={() => setIsSideBarOpen(!isSideBarOpen)}
+      />
 
       <div className="flex-1 p-1 md:p-4">
         <Header
-          onSearch={(city) => setCity(city)}
+          onSearch={handleSearch}
           onToggleSidebar={() => setIsSideBarOpen(!isSideBarOpen)}
+          onUseLocation={handleUseLocation}
           error={error}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-stretch">
-         
           {/* Main Weather */}
-          <WeatherCard weather={weather} forecast={foreCast} />
+   
+
+          <WeatherCard weather={weather} forecast={foreCast} city={city} />
 
           {/* Right side forecast */}
           <WeeklyForeCast weeklyForeCast={weeklyForeCast} />
@@ -154,17 +96,18 @@ const Dashboard = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-fr">
                 <StatsCard
                   title="Real Feel"
-                  value={`${Math.round(weather?.main?.feels_like)}°C`}
+                  value={`${Math.round(weather?.list[0].main?.feels_like)}°C`}
                   icon={Thermometer}
                   iconColor={"red"}
                 />
-                {console.log(weather)}
+
                 <StatsCard
                   title="Wind"
-                  value={`${weather.wind.speed} km/h`}
+                  value={`${weather?.list[0].wind.speed} km/h`}
                   icon={Wind}
                   iconColor={"gray"}
                 />
+
                 <StatsCard
                   title="Chance of rain"
                   value={rainChance === 0 ? "No rain" : `${rainChance}%`}
@@ -174,7 +117,7 @@ const Dashboard = () => {
 
                 <StatsCard
                   title="Pressure"
-                  value={weather.main.pressure}
+                  value={weather?.list[0].main?.pressure}
                   icon={ArrowDownUp}
                   iconColor={"black"}
                 />
