@@ -3,8 +3,8 @@ import React from "react";
 function WeatherCard({ weather, forecast, city }) {
   // ✅ Guard (important)
   if (!weather) return null;
-
-  const mainWeather = weather.list[0];
+  console.log("Weather from weather card: ", weather);
+  const mainWeather = weather.main;
   const rainChance =
     forecast?.[0]?.pop !== undefined ? Math.round(forecast[0].pop * 100) : 0;
   return (
@@ -15,19 +15,19 @@ function WeatherCard({ weather, forecast, city }) {
           <div>
             {/* <h1 className="text-2xl md:text-5xl font-bold">{weather.name}</h1> */}
             <h2 className="text-2xl md:text-5xl font-bold">
-              {weather?.city?.name || city || "Current Location"}
+              {weather?.name || city || "Current Location"}
             </h2>
 
             <p className="text-sm text-gray-400 p-1">
-              {weather?.city?.name || "Loading..."} | Chance of rain:
+                {weather?.weather?.[0]?.description || "Loading..."} | Chance of rain:
               <span> {rainChance}%</span>
             </p>
           </div>
 
           <div className="grid content-end">
             <h2 className="text-4xl md:text-7xl font-bold mt-2">
-              {mainWeather?.main?.temp !== undefined
-                ? Math.round(mainWeather?.main?.temp)
+              {mainWeather?.temp !== undefined
+                ? Math.round(mainWeather?.temp)
                 : "--"}
               °C
             </h2>
@@ -38,8 +38,8 @@ function WeatherCard({ weather, forecast, city }) {
         <img
           className="w-20 h-20 sm:w-28 sm:h-28 md:w-52 md:h-52 object-contain hover:shadow-black hover:scale-105 rounded-full  "
           src={
-            mainWeather?.weather?.[0]?.icon
-              ? `https://openweathermap.org/img/wn/${mainWeather?.weather?.[0]?.icon}@2x.png`
+            weather?.weather?.[0]?.icon
+              ? `https://openweathermap.org/img/wn/${weather?.weather?.[0]?.icon}@2x.png`
               : null
           }
           alt="weather"

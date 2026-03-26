@@ -30,6 +30,9 @@ const Dashboard = ({ location }) => {
 
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
 
+
+console.log("weather: ",weather);
+
   const handleSearch = (city) => {
     if (!city.trim()) return;
     setCity(city);
@@ -96,14 +99,14 @@ const Dashboard = ({ location }) => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-fr">
                 <StatsCard
                   title="Real Feel"
-                  value={`${Math.round(weather?.list[0].main?.feels_like)}°C`}
+                  value={`${Math.round(weather?.main?.feels_like)}°C`}
                   icon={Thermometer}
                   iconColor={"red"}
                 />
 
                 <StatsCard
                   title="Wind"
-                  value={`${weather?.list[0].wind.speed} km/h`}
+                  value={`${weather?.wind.speed} km/h`}
                   icon={Wind}
                   iconColor={"gray"}
                 />
@@ -117,7 +120,7 @@ const Dashboard = ({ location }) => {
 
                 <StatsCard
                   title="Pressure"
-                  value={weather?.list[0].main?.pressure}
+                  value={weather?.main?.pressure}
                   icon={ArrowDownUp}
                   iconColor={"black"}
                 />

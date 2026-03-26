@@ -25,7 +25,7 @@ function App() {
     <>
       {location ? (        
         <div>
-          {console.log(location)}
+         
           <Dashboard location={location}/>
         </div>
       ) : (

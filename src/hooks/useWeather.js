@@ -26,18 +26,18 @@ export const useWeather = (location) => {
             lat: location.lat,
             lon: location.lon,
           });
-          console.log("weatherData", weatherData);
+          // console.log("weatherData", weatherData);
 
           foreCastData = await getForeCast({
             lat: location.lat,
             lon: location.lon,
           });
-          console.log("foreCastData", foreCastData);
+          // console.log("foreCastData", foreCastData);
           weeklyForeCastData = await getWeeklyForeCast({
             lat: location.lat,
             lon: location.lon,
           });
-          console.log("weeklyForeCastData", weeklyForeCastData);
+          // console.log("weeklyForeCastData", weeklyForeCastData);
         } else {
           weatherData = await getWeather({ city });
           foreCastData = await getForeCast({ city });
@@ -54,7 +54,7 @@ export const useWeather = (location) => {
 
         const filtered = getNext7Days(weeklyForeCastData?.list || []);
 
-        setWeather(weeklyForeCastData);
+        setWeather(weatherData);
         setForeCast(foreCastData?.list || []);
         setWeeklyForeCast(filtered);
       } catch (err) {

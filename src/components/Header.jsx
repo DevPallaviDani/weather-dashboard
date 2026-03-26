@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import { MapPin, Search } from "lucide-react";
+import { MapPin, Search, Locate, Navigation } from "lucide-react";
 import profile from "../assets/images/profileavatar.png";
-function Header({ onSearch }) {
+import location from "../assets/images/currentlocation.gif"
+import { FaMapMarkerAlt } from "react-icons/fa";
+function Header({ onSearch, onUseLocation }) {
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const handleSearch = () => {
@@ -43,8 +45,23 @@ function Header({ onSearch }) {
         </div>
         {/* Right Side */}
         <div className="flex items-center gap-4 text-gray-600">
-          <MapPin size={20} />
-          {/* <span>{input}</span> */}
+          <div className="relative group">
+            <button onClick={onUseLocation}>
+              {/* <FaMapMarkerAlt size={20} /> */}
+              <img
+                src={location}
+                className="w-6 h-6 cursor-pointer"
+              />
+            </button>
+            {/* Tooltip */}
+            <span
+              className="absolute left-1/2 -translate-x-1/2 mt-8 
+    bg-black text-white text-xs px-2 py-1 rounded 
+    opacity-0 group-hover:opacity-100 transition whitespace-nowrap"
+            >
+              Use current location
+            </span>
+          </div>
 
           {/* Profile */}
           <img src={profile} alt="profile" className="w-10 h-10 rounded-full" />
