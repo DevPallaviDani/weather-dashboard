@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Dashboard from "./pages/Dashboard";
-import bgImage from "./assets/images/logoskylite.png";
+
 
 function App() {
   const [location, setLocation] = useState(null);

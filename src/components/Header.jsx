@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MapPin, Search, Locate, Navigation } from "lucide-react";
 import profile from "../assets/images/profileavatar.png";
-// import logo from "../assets/images/fulllogo.png"
 import pin from "../assets/images/pin.gif";
 import logo from "../assets/images/logoskylite.png";
 import ThemeToggle from "./ThemeToggle";
