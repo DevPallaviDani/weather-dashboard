@@ -15,9 +15,10 @@ export const getNext7Days = (list) => {
       seenDates.add(date);
     }
   }
-  const next7Daysresult = extendTo7Days(next5Daysresult);
-  return next7Daysresult;
+
+  return extendTo7Days(next5Daysresult);
 };
+
 export const extendTo7Days = (next5Daysresult) => {
   if (!next5Daysresult || next5Daysresult.length === 0) return [];
 
@@ -25,14 +26,13 @@ export const extendTo7Days = (next5Daysresult) => {
 
   const lastDay = next5Daysresult[next5Daysresult.length - 1];
 
-  for (let i = 1; i <= 2; i++) {
-    const newDate = new Date(lastDay.dt_txt);
-    newDate.setDate(newDate.getDate() + i);
+  // iOS-safe parse
+  const base = dayjs(lastDay.dt_txt.replace(" ", "T"));
+  if (!base.isValid()) return result;
 
-    // Get the current date and format it
-    const formattedDate = newDate
-      ? dayjs(newDate).format("YYYY-MM-DD HH:mm:ss")
-      : "";
+  for (let i = 1; i <= 2; i++) {
+    const formattedDate = base.add(i, "day").format("YYYY-MM-DD HH:mm:ss");
+
     console.log(formattedDate);
     // Example Output: 2025-03-27 10:23:45
 

@@ -1,25 +1,27 @@
+import dayjs from "dayjs";
+
 export const getDayLabel = (dateInput) => {
   if (!dateInput) return "";
 
-  let date;
+  let parsed;
 
   if (typeof dateInput === "number") {
-    date = new Date(dateInput * 1000);
+    // Unix timestamp (seconds)
+    parsed = dayjs.unix(dateInput);
   } else if (typeof dateInput === "string") {
-    date = new Date(dateInput.replace(" ", "T"));
+    // Convert "YYYY-MM-DD HH:mm:ss" -> "YYYY-MM-DDTHH:mm:ss" for Safari/iOS safety
+    date = dayjs(dateInput.replace(" ", "T"));
   } else {
     return "Invalid";
   }
 
-  if (isNaN(date)) return "Invalid";
+  if (!parsed.isValid()) return "Invalid";
 
-  const today = new Date();
+  const today = dayjs();
 
-  if (date.toDateString() === today.toDateString()) {
+  if (parsed.isSame(today, "day")) {
     return "Today";
   }
 
-  return date.toLocaleDateString("en-US", {
-    weekday: "short", // Mon, Tue
-  });
+  return parsed.format("ddd"); // Mon, Tue
 };
