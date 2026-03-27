@@ -30,7 +30,7 @@ function WeeklyForeCast({ weeklyForeCast = [], weather }) {
 
       <div>
         {weeklyForeCast.map((day, index) => {
-          const label = getDayLabel(day?.dt_txt || day?.date);
+          const label = getDayLabel(day?.dt_txt || day?.dt);
 
           const iconCode = day?.weather?.[0]?.icon;
           const iconUrl = iconCode

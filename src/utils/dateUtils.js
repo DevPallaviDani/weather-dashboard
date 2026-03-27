@@ -1,15 +1,25 @@
-export const getDayLabel = (dateString) => {
+export const getDayLabel = (dateInput) => {
+  if (!dateInput) return "";
+
+  let date;
+
+  if (typeof dateInput === "number") {
+    date = new Date(dateInput * 1000);
+  } else if (typeof dateInput === "string") {
+    date = new Date(dateInput.replace(" ", "T"));
+  } else {
+    return "Invalid";
+  }
+
+  if (isNaN(date)) return "Invalid";
+
   const today = new Date();
-  const inputDate = new Date(dateString);
 
-  const isToday =
-    today.getDate() === inputDate.getDate() &&
-    today.getMonth() === inputDate.getMonth() &&
-    today.getFullYear() === inputDate.getFullYear();
+  if (date.toDateString() === today.toDateString()) {
+    return "Today";
+  }
 
-  if (isToday) return "Today";
-
-  return inputDate.toLocaleDateString("en-US", {
+  return date.toLocaleDateString("en-US", {
     weekday: "short", // Mon, Tue
   });
 };

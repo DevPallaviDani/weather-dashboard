@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export const getNext7Days = (list) => {
   if (!list || list.length === 0) return [];
 
@@ -27,11 +29,19 @@ export const extendTo7Days = (next5Daysresult) => {
     const newDate = new Date(lastDay.dt_txt);
     newDate.setDate(newDate.getDate() + i);
 
+    // Get the current date and format it
+    const formattedDate = newDate
+      ? dayjs(newDate).format("YYYY-MM-DD HH:mm:ss")
+      : "";
+    console.log(formattedDate);
+    // Example Output: 2025-03-27 10:23:45
+
     result.push({
       ...lastDay,
-      dt_txt: newDate,
+      dt_txt: formattedDate,
       isDummy: true, // mark as dummy
     });
+    console.log("New days ", result);
   }
 
   return result;
