@@ -21,32 +21,42 @@ const getForeCastHours = (item) => {
 function ForecastCard({ foreCastData }) {
   return (
     <>
-      <div className="col-span-12 md:col-span-8 bg-white rounded-2xl p-2  dark:bg-gray-800 ">
-        <h2 className="font-semibold mb-4">Today's Forecast</h2>
-        <div className="flex gap-4 overflow-x-auto justify-between ml-2"
-        // className="grid grid-cols-8 gap-6 items-center justify-between"
-        >
+      <div className="col-span-12 md:col-span-8 bg-white dark:bg-gray-800 rounded-2xl p-3 sm:p-4">
+        <h2 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">
+          Today's Forecast
+        </h2>
+
+        <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-1 pr-1 snap-x snap-mandatory">
           {foreCastData && foreCastData.length > 0 ? (
             foreCastData.map((item, index) => (
               <div
                 key={index}
-                // className="min-w-[80px] text-center"
-                className="flex flex-col items-center p-3 gap-2 hover:rounded-md
-                 border-r-2 border-gray-200 last:border-none  hover:bg-gray-50 transition  dark:border-gray-600 dark:hover:bg-gray-600"
-              >               
-                <p className="text-sm text-gray-500">
+                className="snap-start shrink-0 min-w-[84px] sm:min-w-[92px]
+                     flex flex-col items-center justify-center
+                     p-2 sm:p-3 gap-1.5 sm:gap-2
+                     border border-gray-200 dark:border-gray-600
+                     rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700
+                     transition"
+              >
+                <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-300 text-center">
                   {getForeCastHours(item)}
                 </p>
+
                 <img
-                  className="size-8"
-                  src={`https://openweathermap.org/payload/api/media/file/${item.weather[0].icon}.png`}
+                  className="w-8 h-8 sm:w-9 sm:h-9 object-contain"
+                  src={`https://openweathermap.org/img/wn/${item.weather?.[0]?.icon}@2x.png`}
                   alt="weather"
-                />             
-                <p className="p-1 font-semibold">{Math.round(item.main.temp)}°C</p>
+                />
+
+                <p className="text-sm sm:text-base font-semibold">
+                  {Math.round(item.main.temp)}°C
+                </p>
               </div>
             ))
           ) : (
-            <p>Loading...</p>
+            <p className="text-sm text-gray-500 dark:text-gray-300">
+              Loading...
+            </p>
           )}
         </div>
       </div>

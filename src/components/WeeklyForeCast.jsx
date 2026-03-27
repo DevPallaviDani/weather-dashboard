@@ -25,46 +25,49 @@ function WeeklyForeCast({ weeklyForeCast = [], weather }) {
   }
 
   return (
-    <div className="col-span-12 md:col-span-4 row-span-3 bg-white rounded-2xl p-6 shadow  dark:bg-gray-800">
+    <div className="w-full h-full bg-white rounded-2xl p-4 sm:p-5 shadow dark:bg-gray-800 flex flex-col">
       <h2 className="text-lg font-semibold mb-4">Next Days</h2>
 
-      <div>
+      <div className="flex-1 flex flex-col">
         {weeklyForeCast.map((day, index) => {
           const label = getDayLabel(day?.dt_txt || day?.dt);
-
           const iconCode = day?.weather?.[0]?.icon;
           const iconUrl = iconCode
             ? `https://openweathermap.org/img/wn/${iconCode}@2x.png`
             : "";
-
           const maxTemp = Math.round(day?.main?.temp_max ?? 0);
           const minTemp = Math.round(day?.main?.temp_min ?? 0);
 
           return (
             <div
               key={index}
-              className="flex items-center justify-between p-6 hover:bg-gray-50 hover:rounded-md
-                transition border-b-2 border-gray-200 last:border-none  dark:border-gray-600 dark:hover:bg-gray-600"
+              className="flex-1 min-h-[56px] flex items-center justify-between px-2 sm:px-3
+                     hover:bg-gray-50 hover:rounded-md transition
+                     border-b border-gray-200 last:border-none
+                     dark:border-gray-600 dark:hover:bg-gray-600"
             >
-              {/* Day */}
               <span
-                className={`w-12 font-semibold ${
-                  label === "Today" ? "text-blue-500" : "text-gray-600"
+                className={`w-14 font-semibold ${
+                  label === "Today"
+                    ? "text-blue-500"
+                    : "text-gray-600 dark:text-gray-300"
                 }`}
               >
                 {label}
               </span>
 
-              {/* Icon */}
               {iconUrl && (
                 <img className="w-8 h-8" src={iconUrl} alt="weather icon" />
               )}
 
-              {/* Temp */}
               <span className="text-sm font-medium">
-               <span className="text-gray-800 dark:text-gray-400">{maxTemp}°C</span>  / 
-               <span className=" text-gray-600 dark:text-gray-500">{minTemp}°C</span>
-                {/* Dummy label */}
+                <span className="text-gray-800 dark:text-gray-400">
+                  {maxTemp}°C
+                </span>{" "}
+                /{" "}
+                <span className="text-gray-600 dark:text-gray-500">
+                  {minTemp}°C
+                </span>
                 {day?.isDummy && (
                   <p className="text-xs text-gray-400">(est.)</p>
                 )}
