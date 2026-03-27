@@ -8,17 +8,14 @@ import WeeklyForeCast from "../components/WeeklyForeCast";
 import { useWeather } from "../hooks/useWeather";
 import { WiHumidity } from "weather-icons-react";
 import { getWeatherTheme } from "../utils/themeUtils";
-
-import {
-  Droplets,
+import { 
   Wind,
-  Gauge,
-  ArrowDownUp,
+  Gauge, 
   CloudRain,
   Thermometer,
   EyeIcon,
 } from "lucide-react";
-import SunCycle from "../components/SunCycle";
+// import SunCycle from "../components/SunCycle";
 
 const Dashboard = ({ location }) => {
   const {
@@ -65,8 +62,10 @@ const Dashboard = ({ location }) => {
     <div
       className="min-h-screen w-full transition-all duration-700 dark:text-gray-400
              bg-[radial-gradient(circle_at_top,_#f8fafc,_#e2e8f0)]
-             dark:bg-[radial-gradient(circle_at_top,_#0f172a,_#020617)]"
+             dark:bg-[radial-gradient(circle_at_top,_#0f172a,_#020617)] "
+              
     >
+      
       {/* <Sidebar
         isOpen={isSideBarOpen}
         onToggleSidebar={() => setIsSideBarOpen(!isSideBarOpen)}
@@ -97,14 +96,11 @@ const Dashboard = ({ location }) => {
                   AIR CONDITION
                 </h2>
               </div>
-              {/* <div className="m-1 p-2">
-            <SunCycle weather={weather} />
-          </div> */}
+             
 
               {weather && (
                 <div
-                  className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"
-                  // className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 auto-rows-fr"
+                  className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"                
                 >
                   <StatsCard
                     title="Feels Like"

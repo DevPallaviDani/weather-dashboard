@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MapPin, Search, Locate, Navigation } from "lucide-react";
 import profile from "../assets/images/profileavatar.png";
-import location from "../assets/images/currentlocationgif.gif";
-import pin from "../assets/images/pin2.gif";
-import { FaMapMarkerAlt } from "react-icons/fa";
+// import logo from "../assets/images/fulllogo.png"
+import pin from "../assets/images/pin.gif";
+import logo from "../assets/images/logoskylite.png";
 import ThemeToggle from "./ThemeToggle";
 function Header({ onSearch, onUseLocation }) {
   const [input, setInput] = useState("");
@@ -21,11 +21,22 @@ function Header({ onSearch, onUseLocation }) {
     <>
       <div className="w-full bg-white dark:bg-gray-800 rounded-2xl shadow p-3 sm:p-4 mb-4">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+           <img
+              src={logo}
+              alt="SkyLite logo"
+              className="w-40 h-40 sm:w-10 sm:h-10"
+            />
           {/* Brand */}
-          <div className="flex items-center justify-between w-full lg:w-auto">
-            <h1 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-              SkyLite
-            </h1>
+          <div className="flex items-center gap-3 justify-between w-full lg:w-auto">
+           
+            <div className="leading-tight">
+              <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                SkyLite
+              </h1>
+              <p className="text-sm dark:text-white/70 text-gray-500 dark:text-gray-300 mt-0.5">
+                Weather, at a glance.
+              </p>
+            </div>
           </div>
 
           {/* Search */}

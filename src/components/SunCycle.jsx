@@ -4,7 +4,7 @@ import {
   SunsetIcon,
   SunriseIcon,
 } from "lucide-react";
-import sun from "../assets/images/sun.gif"
+// import sun from "../assets/images/sun.gif"
 
 const SunCycle = ({ weather }) => {
   const sunrise = weather?.sys?.sunrise * 1000;
