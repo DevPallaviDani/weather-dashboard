@@ -9,7 +9,7 @@ function ThemeToggle() {
     document.documentElement.classList.toggle("dark", darkMode);
     localStorage.setItem("theme", darkMode ? "dark" : "light");
   }, [darkMode]);
-  console.log(darkMode);
+  // console.log(darkMode);
 
   return (
     <div>

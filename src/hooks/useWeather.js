@@ -13,8 +13,23 @@ export const useWeather = (location) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const handleSearch = (city) => {
+    if (!city.trim()) return;
+    setCity(city);
+    setIsUsingLocation(false);
+  };
+
+  const handleUseLocation = () => {
+    setIsUsingLocation(true);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
+      // ✅ ADD THIS CHECK
+      if (isUsingLocation && !location) return;
+
+      if (!isUsingLocation && !city) return;
+
       setLoading(true);
       setError("");
 
@@ -73,7 +88,8 @@ export const useWeather = (location) => {
     loading,
     error,
     city,
-    setCity,
-    setIsUsingLocation,
+
+    handleSearch,
+    handleUseLocation,
   };
 };

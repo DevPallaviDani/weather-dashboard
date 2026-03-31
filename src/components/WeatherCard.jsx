@@ -4,7 +4,7 @@ import SunCycle from "./SunCycle";
 function WeatherCard({ weather, forecast, city }) {
   // ✅ Guard (important)
   if (!weather) return null;
-  console.log("Weather from weather card: ", weather);
+  // console.log("Weather from weather card: ", weather);
   const mainWeather = weather.main;
   const rainChance =
     forecast?.[0]?.pop !== undefined ? Math.round(forecast[0].pop * 100) : 0;
@@ -14,10 +14,10 @@ function WeatherCard({ weather, forecast, city }) {
         className="col-span-12 md:col-span-8 bg-transparent text-gray-500 dark:text-gray-100
              rounded-2xl p-3 sm:p-4
              flex flex-col sm:flex-row sm:justify-between sm:items-center
-             gap-4 sm:gap-6"
+             gap-4 sm:gap-6 shrink-0 "
       >
         {/* Left content */}
-        <div className="grid gap-4 sm:gap-6 p-1 sm:p-2 min-w-0">
+        <div className="grid gap-3 sm:gap-6 p-1 sm:p-2 min-w-0">
           <div className="min-w-0">
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold truncate">
               {weather?.name || city || "Current Location"}

@@ -25,7 +25,8 @@ function WeeklyForeCast({ weeklyForeCast = [], weather }) {
   }
 
   return (
-    <div className="w-full h-full bg-white rounded-2xl p-4 sm:p-5 shadow dark:bg-gray-800 flex flex-col">
+    <div className="w-full h-full bg-white rounded-2xl p-4 sm:p-5 shadow dark:bg-gray-800 
+    flex flex-col">
       <h2 className="text-lg font-semibold mb-4">Next Days</h2>
 
       <div className="flex-1 flex flex-col">
@@ -41,8 +42,8 @@ function WeeklyForeCast({ weeklyForeCast = [], weather }) {
           return (
             <div
               key={index}
-              className="flex-1 min-h-[56px] flex items-center justify-between px-2 sm:px-3
-                     hover:bg-gray-50 hover:rounded-md transition
+              className="flex-1 min-h-[54px] flex items-center justify-between 
+              px-2 sm:px-3 hover:bg-gray-50 hover:rounded-md transition
                      border-b border-gray-200 last:border-none
                      dark:border-gray-600 dark:hover:bg-gray-600"
             >

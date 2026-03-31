@@ -33,7 +33,7 @@ export const extendTo7Days = (next5Daysresult) => {
   for (let i = 1; i <= 2; i++) {
     const formattedDate = base.add(i, "day").format("YYYY-MM-DD HH:mm:ss");
 
-    console.log(formattedDate);
+    // console.log(formattedDate);
     // Example Output: 2025-03-27 10:23:45
 
     result.push({
@@ -41,7 +41,7 @@ export const extendTo7Days = (next5Daysresult) => {
       dt_txt: formattedDate,
       isDummy: true, // mark as dummy
     });
-    console.log("New days ", result);
+    // console.log("New days ", result);
   }
 
   return result;

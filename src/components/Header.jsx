@@ -5,7 +5,11 @@ import profile from "../assets/images/profileavatar.png";
 import pin from "../assets/images/pin.gif";
 import logo from "../assets/images/logoskylite.png";
 import ThemeToggle from "./ThemeToggle";
+
+
 function Header({ onSearch, onUseLocation }) {
+
+  
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const handleSearch = () => {
